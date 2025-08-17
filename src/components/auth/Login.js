@@ -1,19 +1,29 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "../navigation/Header";
+
+import { checkValidate } from "../../utils/validate";
 
 const Login = () => {
   const [isLoginPage, setLoginPage] = useState(true);
+  const [error, setError] = useState(null);
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  const email = useRef();
+  const password = useRef();
+  const name = useRef();
 
   const changeSignup = () => {
     setLoginPage(!isLoginPage);
   };
 
-  const LoginUser = () => {
-    console.log("login user");
-  };
-
-  const registerUser = () => {
-    console.log("register user");
+  const handleButtonClick = () => {
+    const message = checkValidate(
+      isLoginPage,
+      email.current.value,
+      password.current.value,
+      name?.current?.value
+    );
+    setError(message);
   };
 
   return (
@@ -32,13 +42,17 @@ const Login = () => {
 
       {/* Login Form */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <form className="w-11/12 sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-black bg-opacity-70 p-8 rounded-lg shadow-lg">
+        <form
+          className="w-11/12 sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-black bg-opacity-70 p-8 rounded-lg shadow-lg"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <h1 className="text-2xl md:text-3xl font-bold mb-6">
             Sign {isLoginPage ? "In" : "Up"}
           </h1>
           {!isLoginPage && (
             <input
-              type="name"
+              type="text"
+              ref={name}
               placeholder="Enter your name"
               className="w-full p-3 mb-4 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500"
               required={true}
@@ -47,14 +61,20 @@ const Login = () => {
 
           <input
             type="email"
+            ref={email}
             placeholder="Enter your email"
             className="w-full p-3 mb-6 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+            // value={email}
+            // onChange={(e) => setEmail(e.target.value)}
             required={true}
           />
 
           <input
             type="password"
+            ref={password}
             placeholder="Enter your password"
+            // value={password}
+            // onChange={(e) => setPassword(e.target.value)}
             className="w-full p-3 mb-6 rounded bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500"
             required={true}
           />
@@ -66,16 +86,13 @@ const Login = () => {
               required={true}
             />
           )}
+          <p className="text-red-600 font-bold text-lg py-3">{error}</p>
+          {/* {error != null && <p className="text-red-600">{error}</p>} */}
 
           <button
-            type="button"
             className="w-full py-3 bg-red-600 hover:bg-red-700 rounded font-semibold"
             onClick={() => {
-              if (isLoginPage) {
-                LoginUser();
-              } else {
-                registerUser();
-              }
+              handleButtonClick();
             }}
           >
             Sign {isLoginPage ? "In" : "Up"}
@@ -85,7 +102,6 @@ const Login = () => {
             {isLoginPage ? "New to Netflix? " : "Already have an account? "}
 
             <button
-              type="button"
               className="text-white hover:underline"
               onClick={() => {
                 changeSignup();
