@@ -3,6 +3,12 @@ import Header from "../navigation/Header";
 
 import { checkValidate } from "../../utils/validate";
 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../utils/firebase";
+
 const Login = () => {
   const [isLoginPage, setLoginPage] = useState(true);
   const [error, setError] = useState(null);
@@ -24,6 +30,47 @@ const Login = () => {
       name?.current?.value
     );
     setError(message);
+
+    if (message) return;
+    if (isLoginPage) {
+      // login
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log("sign in :>> ", user);
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setError(errorCode + " - " + errorMessage);
+        });
+    } else {
+      // registar
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log("sign up :>> ", user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setError(errorCode + " - " + errorMessage);
+          // ..
+        });
+    }
   };
 
   return (
