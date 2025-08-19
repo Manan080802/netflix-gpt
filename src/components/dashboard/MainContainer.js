@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import VideoBackGround from "./VideoBackGround";
 import VideoTitle from "./VideoTitle";
 
 const MainContainer = () => {
   const moviesList = useSelector((state) => state.movie.nowPlayingMovie);
-  if (!moviesList) return;
-  const randomMovie = Math.floor(Math.random() * 20);
-  const mainMovie = moviesList?.results?.[randomMovie];
-  console.log("mainMovie", mainMovie);
+  const [randomMovie, setRandomMovie] = useState(null);
+
+  useEffect(() => {
+    const randomMovie = Math.floor(Math.random() * 20) + 1;
+    setRandomMovie(randomMovie);
+  }, []);
+  if (!moviesList || !randomMovie) return;
+  const mainMovie = moviesList?.results?.[randomMovie - 1];
   return (
     <div className="relative w-full h-screen  ">
       <VideoBackGround movieId={mainMovie?.id}></VideoBackGround>
