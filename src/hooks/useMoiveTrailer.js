@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { API_OPTION, API_URL } from "../constants/config";
 
 const useMovieTrailer = (movieId) => {
+  console.log("movieId", movieId);
   const [movieVideo, setMovieVideo] = useState(null);
   const getMovieVideo = async () => {
     const api_url = API_URL + "movie/" + movieId + "/videos";
@@ -18,6 +19,7 @@ const useMovieTrailer = (movieId) => {
   useEffect(() => {
     getMovieVideo();
   }, []);
+  console.log("first", movieVideo);
   return movieVideo;
 };
 export default useMovieTrailer;

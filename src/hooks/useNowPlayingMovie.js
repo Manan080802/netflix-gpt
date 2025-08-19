@@ -8,7 +8,7 @@ const useNowPlayingMovie = () => {
   const disPatch = useDispatch();
 
   const getMovieData = async () => {
-    const api_url = API_URL + "movie/now_playing";
+    const api_url = API_URL + "movie/now_playing?region=IN";
 
     const data = await fetch(api_url, API_OPTION);
     const movieDetails = await data.json();

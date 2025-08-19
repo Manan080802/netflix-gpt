@@ -8,7 +8,7 @@ const MainContainer = () => {
   if (!moviesList) return;
   const randomMovie = Math.floor(Math.random() * 20);
   const mainMovie = moviesList?.results?.[randomMovie];
-  console.log("mainMovie :>> ", mainMovie);
+  console.log("mainMovie", mainMovie);
   return (
     <div className="relative w-full h-screen  ">
       <VideoBackGround movieId={mainMovie?.id}></VideoBackGround>
