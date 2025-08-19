@@ -9,11 +9,6 @@ import {
 // import Login from "./auth/Login";
 import Browse from "./Browse";
 import Login from "./auth/Login";
-import { useEffect } from "react";
-import { auth } from "../utils/firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../app/features/users/userSlice";
 
 // import Header from "./navigation/Header";
 
@@ -29,7 +24,6 @@ import { addUser, removeUser } from "../app/features/users/userSlice";
  */
 
 const Body = () => {
-  const disPatch = useDispatch();
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -43,17 +37,6 @@ const Body = () => {
     },
   ]);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const { uid, email, displayName } = user;
-        disPatch(addUser({ uid, email, displayName }));
-      } else {
-        disPatch(removeUser());
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <div>
       <RouterProvider router={appRouter}>

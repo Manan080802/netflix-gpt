@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Header from "../navigation/Header";
 
 import { checkValidate } from "../../utils/validate";
@@ -9,18 +9,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUser } from "../../app/features/users/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const userinfo = useSelector((selector) => selector.user.userinfo);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (userinfo) {
-      navigate("/browse");
-    }
-  }, [userinfo, navigate]);
   const [isLoginPage, setLoginPage] = useState(true);
   const [error, setError] = useState(null);
   const email = useRef();
@@ -69,7 +63,7 @@ const Login = () => {
             displayName: name?.current?.value || "",
           })
             .then(() => {
-              const { uid, email, displayName } = auth.currentUser  ;
+              const { uid, email, displayName } = auth.currentUser;
               disPatch(addUser({ uid, email, displayName }));
               navigate("/browse");
             })
