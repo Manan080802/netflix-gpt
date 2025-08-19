@@ -11,10 +11,8 @@ import {
 import { auth } from "../../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../app/features/users/userSlice";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [isLoginPage, setLoginPage] = useState(true);
   const [error, setError] = useState(null);
   const email = useRef();
@@ -43,9 +41,7 @@ const Login = () => {
         email.current.value,
         password.current.value
       )
-        .then((userCredential) => {
-          navigate("/browse");
-        })
+        .then((userCredential) => {})
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
@@ -65,7 +61,6 @@ const Login = () => {
             .then(() => {
               const { uid, email, displayName } = auth.currentUser;
               disPatch(addUser({ uid, email, displayName }));
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
