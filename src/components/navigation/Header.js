@@ -45,7 +45,7 @@ const Header = () => {
         />
         {userinfo && (
           <div>
-            <span className="mx-3">{userinfo.displayName}</span>
+            <span className="mx-3 text-white">{userinfo.displayName}</span>
             <button
               className="bg-red-600 text-white text-sm sm:text-base md:text-lg rounded-md px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 font-semibold hover:bg-red-700 transition"
               onClick={() => {

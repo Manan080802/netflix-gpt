@@ -12,7 +12,7 @@ const useNowPlayingMovie = () => {
 
     const data = await fetch(api_url, API_OPTION);
     const movieDetails = await data.json();
-    disPatch(addNowMovies(movieDetails?.results));
+    disPatch(addNowMovies(movieDetails));
   };
   useEffect(() => {
     getMovieData();
