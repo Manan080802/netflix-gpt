@@ -1,18 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./navigation/Header";
-import { API_OPTION, API_URL } from "../constants/config";
+import useNowPlayingMovie from "../hooks/useNowPlayingMovie";
 
 const Browse = () => {
-  const getMovieData = async () => {
-    const api_url = API_URL + "movie/now_playing";
-
-    const data = await fetch(api_url, API_OPTION);
-    const movieDetails = await data.json();
-  };
-  useEffect(() => {
-    getMovieData();
-  }, []);
-
+  useNowPlayingMovie();
   return (
     <div>
       <Header></Header>
