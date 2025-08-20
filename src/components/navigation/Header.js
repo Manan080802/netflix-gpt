@@ -15,7 +15,7 @@ const Header = () => {
       if (user) {
         const { uid, email, displayName } = user;
         disPatch(addUser({ uid, email, displayName }));
-        navigate("/browse");
+        // navigate("/browse");
       } else {
         disPatch(removeUser());
         navigate("/");

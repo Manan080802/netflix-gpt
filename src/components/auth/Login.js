@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../navigation/Header";
 
 import { checkValidate } from "../../utils/validate";
@@ -9,11 +9,19 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../app/features/users/userSlice";
 import { BACKgROUND_IMG_URL } from "../../constants/config";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const userinfo = useSelector((selector) => selector.user.userinfo);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userinfo) {
+      navigate("/browse");
+    }
+  }, [userinfo, navigate]);
   const [isLoginPage, setLoginPage] = useState(true);
   const [error, setError] = useState(null);
   const email = useRef();
@@ -42,7 +50,11 @@ const Login = () => {
         email.current.value,
         password.current.value
       )
-        .then((userCredential) => {})
+        .then((userCredential) => {
+          const { uid, email, displayName } = userCredential.user;
+          disPatch(addUser({ uid, email, displayName }));
+          navigate("/browse");
+        })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
@@ -62,6 +74,7 @@ const Login = () => {
             .then(() => {
               const { uid, email, displayName } = auth.currentUser;
               disPatch(addUser({ uid, email, displayName }));
+              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
