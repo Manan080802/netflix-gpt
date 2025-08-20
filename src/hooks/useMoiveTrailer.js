@@ -1,9 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { API_OPTION, API_URL } from "../constants/config";
+import { useDispatch, useSelector } from "react-redux";
+import { addTrailerDetail } from "../app/features/movies/movieSlice";
 
 const useMovieTrailer = (movieId) => {
-  const [movieVideo, setMovieVideo] = useState(movieId);
+  const disPatch = useDispatch();
+  const trailerVideo = useSelector((store) => store.movie.trailerDetail);
+
   const getMovieVideo = async () => {
     const api_url = API_URL + "movie/" + movieId + "/videos";
     const data = await fetch(api_url, API_OPTION);
@@ -12,13 +16,15 @@ const useMovieTrailer = (movieId) => {
     const trailer = result.results?.find(
       (video) => video.type === "Trailer" && video.site === "YouTube"
     );
-
-    setMovieVideo(trailer || result.results?.[0] || null);
+    disPatch(
+      addTrailerDetail({
+        movieId,
+        trailer: trailer || result?.results?.[0] || null,
+      })
+    );
   };
   useEffect(() => {
-    getMovieVideo();
+    if (!trailerVideo || trailerVideo?.movieId !== movieId) getMovieVideo();
   }, []);
-
-  return movieVideo;
 };
 export default useMovieTrailer;
