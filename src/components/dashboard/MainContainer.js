@@ -14,7 +14,7 @@ const MainContainer = () => {
   if (!moviesList || !randomMovie) return;
   const mainMovie = moviesList?.results?.[randomMovie - 1];
   return (
-    <div className="relative w-full h-screen  ">
+    <div className="relative w-full aspect-video  ">
       <VideoBackGround movieId={mainMovie?.id}></VideoBackGround>
       {/* Gradient overlay for readability */}
       {/* <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-black"></div> */}
