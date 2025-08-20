@@ -20,7 +20,7 @@ const MainContainer = () => {
       {/* <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-black"></div> */}
 
       {/* Title & Buttons overlay */}
-      <div className="absolute bottom-32 left-10 z-10">
+      <div className="absolute bottom-32 left-24 z-10">
         <VideoTitle
           title={(mainMovie?.original_title ?? mainMovie?.title) || ""}
           overview={mainMovie?.overview || ""}
