@@ -2,21 +2,25 @@ import React from "react";
 import useMovieTrailer from "../../hooks/useMoiveTrailer";
 import { useSelector } from "react-redux";
 
-const VideoBackGround = (props) => {
+const VideoBackGround = ({ movieId }) => {
   const trailer = useSelector((state) => state.movie.trailerDetail);
-  const { movieId } = { ...props };
   useMovieTrailer(movieId);
-  if (!trailer) return;
+
+  const videoKey = trailer?.key || trailer?.trailer?.key;
+  if (!videoKey) return null;
+
+  console.log("Trailer Key:", videoKey);
+
   return (
-    <div className="absolute top-0 left-0 w-full aspect-video -z-10 ">
+    <div className="absolute inset-0 -z-10 overflow-hidden">
       <iframe
-        className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto aspect-video -translate-x-1/2 -translate-y-1/2"
-        src={`https://www.youtube.com/embed/${trailer?.trailer?.key}?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=${trailer?.trailer?.key}&modestbranding=1&rel=0&iv_load_policy=3`}
+        className="absolute top-0 left-0 w-full h-full"
+        src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoKey}&modestbranding=1&rel=0`}
         title="Movie Trailer"
         frameBorder="0"
-        allow="autoplay; fullscreen"
+        allow="autoplay; fullscreen; encrypted-media"
         allowFullScreen
-      ></iframe>
+      />
     </div>
   );
 };
