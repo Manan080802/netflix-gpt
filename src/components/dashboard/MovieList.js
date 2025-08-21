@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
-  console.log("movies", movies);
   const scrollRef = useRef(null);
 
   // Scroll handler

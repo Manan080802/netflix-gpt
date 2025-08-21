@@ -9,8 +9,6 @@ const VideoBackGround = ({ movieId }) => {
   const videoKey = trailer?.key || trailer?.trailer?.key;
   if (!videoKey) return null;
 
-  console.log("Trailer Key:", videoKey);
-
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden">
       <iframe
