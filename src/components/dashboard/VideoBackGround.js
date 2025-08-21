@@ -8,7 +8,7 @@ const VideoBackGround = (props) => {
   useMovieTrailer(movieId);
   if (!trailer) return;
   return (
-    <div className="absolute top-0 left-0 w-full h-[calc(100vh-4px)] -z-10 overflow-hidden">
+    <div className="absolute top-0 left-0 w-full h-[calc(100vh-4px)] -z-10 ">
       <iframe
         className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto aspect-video -translate-x-1/2 -translate-y-1/2"
         src={`https://www.youtube.com/embed/${trailer?.trailer?.key}?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=${trailer?.trailer?.key}&modestbranding=1&rel=0&iv_load_policy=3`}
