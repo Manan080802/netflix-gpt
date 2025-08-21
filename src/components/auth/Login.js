@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const userinfo = useSelector((selector) => selector.user.userinfo);
   const navigate = useNavigate();
+  console.log("process.env.TMDB", process.env.REACT_APP_TMDB);
   useEffect(() => {
     if (userinfo) {
       navigate("/browse");
