@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
+  console.log("movies", movies);
   const scrollRef = useRef(null);
 
   // Scroll handler
@@ -45,42 +46,9 @@ const MovieList = ({ title, movies }) => {
           ref={scrollRef}
           className="flex space-x-4 overflow-x-auto scrollbar-hide scroll-smooth mx-4"
         >
-          {/* {movies?.map((movie, index) => (
+          {movies?.results?.map((movie, index) => (
             <MovieCard key={index} movie={movie} />
-          ))} */}
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
-          <MovieCard></MovieCard>
+          ))}
         </div>
         {/* Right Button */}
         <button
