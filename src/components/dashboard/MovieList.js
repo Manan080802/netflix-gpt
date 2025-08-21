@@ -14,6 +14,7 @@ const MovieList = ({ title, movies }) => {
       });
     }
   };
+  if (!movies?.results?.length) return;
 
   return (
     <div className="px-6">
