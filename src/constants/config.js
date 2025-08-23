@@ -11,3 +11,24 @@ export const API_OPTION = {
   },
 };
 export const API_URL = "https://api.themoviedb.org/3/";
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  { identifier: "spanish", name: "Spanish" },
+];
+
+export const lang = {
+  en: {
+    search: "Search",
+    gptSearchPlaceholder: "What would you like to watch today?",
+  },
+  hindi: {
+    search: "खोज",
+    gptSearchPlaceholder: "आज आप क्या देखना चाहेंगे?",
+  },
+  spanish: {
+    search: "buscar",
+    gptSearchPlaceholder: "¿Qué te gustaría ver hoy?",
+  },
+};
