@@ -2,7 +2,7 @@ import React from "react";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="max-w-xl">
+    <div className="max-w-xl md:px-12">
       {/* Responsive title */}
       <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold drop-shadow-lg text-white">
         {title}

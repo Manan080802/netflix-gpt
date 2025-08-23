@@ -36,21 +36,32 @@ const Header = () => {
       });
   };
   return (
-    <header className="absolute top-0 left-0 w-full px-4 sm:px-6 md:px-8 py-3 bg-gradient-to-b from-black z-20">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="fixed top-0 left-0 w-full bg-gradient-to-b from-black z-20">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 py-3">
+        {/* Logo */}
         <img
           src={LOGO_URL}
           alt="Netflix Logo"
-          className="w-24 sm:w-32 md:w-40 lg:w-44 object-contain cursor-pointer"
+          className="w-24 sm:w-28 md:w-36 lg:w-40 object-contain cursor-pointer"
         />
+
+        {/* Right Section */}
         {userinfo && (
-          <div>
-            <span className="mx-3 text-white">{userinfo.displayName}</span>
+          <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-6">
+            {/* User Name */}
+            <span className="hidden sm:inline text-white text-sm md:text-base font-medium">
+              {userinfo.displayName}
+            </span>
+
+            {/* GPT Search Button */}
+            <button className="bg-purple-600 text-white text-xs sm:text-sm md:text-base rounded-md px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 font-semibold hover:bg-purple-700 transition">
+              GPT SEARCH
+            </button>
+
+            {/* Sign Out Button */}
             <button
-              className="bg-red-600 text-white text-sm sm:text-base md:text-lg rounded-md px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 font-semibold hover:bg-red-700 transition"
-              onClick={() => {
-                signOutData();
-              }}
+              className="bg-red-600 text-white text-xs sm:text-sm md:text-base rounded-md px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 font-semibold hover:bg-red-700 transition"
+              onClick={() => signOutData()}
             >
               Sign out
             </button>
