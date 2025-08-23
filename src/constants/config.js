@@ -32,3 +32,5 @@ export const lang = {
     gptSearchPlaceholder: "¿Qué te gustaría ver hoy?",
   },
 };
+
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
