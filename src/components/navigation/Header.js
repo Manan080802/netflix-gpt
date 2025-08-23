@@ -5,9 +5,11 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../../app/features/users/userSlice";
 import { LOGO_URL } from "../../constants/config";
+import { handleGptSearch } from "../../app/features/gpt/gptSlice";
 
 const Header = () => {
   const userinfo = useSelector((select) => select.user.userinfo);
+  const isGptSearch = useSelector((select) => select.gpt.isGptSearch);
   const disPatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -54,8 +56,14 @@ const Header = () => {
             </span>
 
             {/* GPT Search Button */}
-            <button className="bg-purple-600 text-white text-xs sm:text-sm md:text-base rounded-md px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 font-semibold hover:bg-purple-700 transition">
-              GPT SEARCH
+            <button
+              className="bg-purple-600 text-white text-xs sm:text-sm md:text-base rounded-md px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 font-semibold hover:bg-purple-700 transition"
+              onClick={() => {
+                disPatch(handleGptSearch());
+                console.log("isGptSearch", isGptSearch);
+              }}
+            >
+              {isGptSearch ? "Home page" : "Gpt search"}
             </button>
 
             {/* Sign Out Button */}
