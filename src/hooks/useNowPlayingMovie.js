@@ -1,0 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useDispatch, useSelector } from "react-redux";
+import { API_OPTION, API_URL } from "../constants/config";
+import { addNowMovies } from "../app/features/movies/movieSlice";
+import { useEffect } from "react";
+
+const useNowPlayingMovie = () => {
+  const disPatch = useDispatch();
+  const nowMovingList = useSelector((state) => state.movie.nowPlayingMovie);
+
+  const getMovieData = async () => {
+    const api_url = API_URL + "movie/now_playing?region=IN";
+
+    const data = await fetch(api_url, API_OPTION);
+    const movieDetails = await data.json();
+    disPatch(addNowMovies(movieDetails));
+  };
+  useEffect(() => {
+    !nowMovingList && getMovieData();
+  }, []);
+};
+export default useNowPlayingMovie;

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../navigation/Header";
 
 import { checkValidate } from "../../utils/validate";
@@ -9,12 +9,20 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../app/features/users/userSlice";
+import { BACKgROUND_IMG_URL } from "../../constants/config";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const userinfo = useSelector((selector) => selector.user.userinfo);
   const navigate = useNavigate();
+  console.log("process.env.TMDB", process.env.REACT_APP_TMDB);
+  useEffect(() => {
+    if (userinfo) {
+      navigate("/browse");
+    }
+  }, [userinfo, navigate]);
   const [isLoginPage, setLoginPage] = useState(true);
   const [error, setError] = useState(null);
   const email = useRef();
@@ -44,6 +52,8 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
+          const { uid, email, displayName } = userCredential.user;
+          disPatch(addUser({ uid, email, displayName }));
           navigate("/browse");
         })
         .catch((error) => {
@@ -89,7 +99,7 @@ const Login = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/258d0f77-2241-4282-b613-8354a7675d1a/web/IN-en-20250721-TRIFECTA-perspective_cadc8408-df6e-4313-a05d-daa9dcac139f_large.jpg"
+          src={BACKgROUND_IMG_URL}
           alt="background"
           className="h-full w-full object-cover brightness-50"
         />
