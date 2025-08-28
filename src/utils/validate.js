@@ -7,7 +7,6 @@ export const checkValidate = (isLoginPage, email, password, name) => {
 
   if (!isLoginPage) {
     let isname = /^[a-zA-Z]+(?:[ -'][a-zA-Z]+)*$/.test(name);
-    console.log("isname :>> ", isname);
     if (!isname) return "Name is not valid";
   }
 
